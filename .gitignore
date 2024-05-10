@@ -1,0 +1,53 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignore bundler config.
+chat-back/.bundle
+
+# Ignore all environment files (except templates).
+.env*
+!chat-back/.env*.erb
+
+# Ignore all logfiles and tempfiles.
+chat-back/log/*
+chat-back/tmp/*
+!chat-back/log/.keep
+!chat-back/tmp/.keep
+
+# Ignore pidfiles, but keep the directory.
+chat-back/tmp/pids/*
+!chat-back/tmp/pids/
+!chat-back/tmp/pids/.keep
+
+# Ignore storage (uploaded files in development and any SQLite databases).
+chat-back/storage/*
+!chat-back/storage/.keep
+chat-back/tmp/storage/*
+!chat-back/tmp/storage/
+!chat-back/tmp/storage/.keep
+
+# Ignore master key for decrypting credentials and more.
+chat-back/config/master.key
+
