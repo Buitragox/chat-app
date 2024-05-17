@@ -51,3 +51,5 @@ chat-back/tmp/storage/*
 # Ignore master key for decrypting credentials and more.
 chat-back/config/master.key
 
+examples.txt
+
