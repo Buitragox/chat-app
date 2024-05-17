@@ -5,7 +5,12 @@ module Users
   class SessionsController < Devise::SessionsController
     include ActionController::Cookies
 
+    # Devise automatically performs a require_no_authentication method that
+    # uses flash messages, which are disabled in API mode.
+    # We skip this step for the create method.
     skip_before_action :require_no_authentication, only: [:create]
+
+    # Dont sanitize anything, just for the demo.
     # before_action :configure_sign_in_params, only: [:create]
 
     # GET /resource/sign_in
@@ -17,11 +22,10 @@ module Users
     def create
       sign_out if user_signed_in?
 
+      # Dont check any password to simplify things.
       @user = User.find_by(email: params[:email])
       if @user
         sign_in @user
-        # Rails.logger.info "Logged in #{@user.email}"
-        # Rails.logger.info "Warden: #{env['warden'].user}"
         render status: :ok
       else
         render status: :unauthorized
