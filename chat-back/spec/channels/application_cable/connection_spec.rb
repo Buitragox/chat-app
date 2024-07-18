@@ -9,13 +9,11 @@ RSpec.describe ApplicationCable::Connection do
   # Warden is not loaded in tests for channels, so we stub the environment and warden into the connection
   before do
     allow_any_instance_of(ApplicationCable::Connection).to receive(:env).and_return(env)
+    allow(env).to receive(:[]).with('warden').and_return(warden)
   end
 
   context 'when user is logged in' do
-    before do
-      warden = instance_double(Warden::Proxy, user:)
-      allow(env).to receive(:[]).with('warden').and_return(warden)
-    end
+    let(:warden) { instance_double(Warden::Proxy, user:) }
 
     it 'successfully connects' do
       connect '/cable'
@@ -24,14 +22,10 @@ RSpec.describe ApplicationCable::Connection do
   end
 
   context 'when user is not logged in' do
-    before do
-      warden = instance_double(Warden::Proxy, user: nil)
-      allow(env).to receive(:[]).with('warden').and_return(warden)
-    end
+    let(:warden) { instance_double(Warden::Proxy, user: nil) }
 
     it 'rejects the connection' do
       expect { connect '/cable' }.to have_rejected_connection
     end
   end
-
 end
